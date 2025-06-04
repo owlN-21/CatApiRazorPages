@@ -1,0 +1,15 @@
+@page
+@model InformationModel
+
+<h1>@Model.Breed.Name</h1>
+
+<p><strong>Описание:</strong> @Model.Breed.Description</p>
+
+@if (Model.Breed.Images?.Any() == true)
+{
+    <img src="@Model.Breed.Images.First().Url" alt="@Model.Breed.Name" width="300" />
+}
+else
+{
+    <p><i>Изображение отсутствует</i></p>
+}

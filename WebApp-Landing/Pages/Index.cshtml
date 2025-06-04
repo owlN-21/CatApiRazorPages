@@ -5,21 +5,51 @@
 }
 
 
-<h1>Породы кошек</h1>
+<style>
+    .breed-container {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .breed-link {
+        text-decoration: none;
+        color: black;
+        transition: color 0.2s ease-in-out;
+        font-size: 28px;
+    }
+
+    .breed-link:hover {
+        color: blue;
+        text-decoration: underline;
+    }
+
+    .breed-image {
+        margin-top: 15px;
+        max-width: 400px;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<h1 style="text-align:center; margin-bottom: 30px;">Породы кошек</h1>
 
 @foreach (var breed in Model.Breeds)
 {
-    <div style="margin-bottom: 20px;">
-        <h2>@breed.Name</h2>
-        <p>@breed.Description</p>
+    <div class="breed-container">
+        <h2>
+            <a href="/Information?breedId=@breed.Id" class="breed-link">
+                @breed.Name
+            </a>
+        </h2>
 
         @if (breed.Images?.Any() == true)
         {
-            <img src="@breed.Images.First().Url" alt="@breed.Name" width="200" />
+            <img src="@breed.Images.First().Url" alt="@breed.Name" class="breed-image" />
         }
         else
         {
             <p><i>Изображение отсутствует</i></p>
         }
-    </div>
+            </div>
 }
