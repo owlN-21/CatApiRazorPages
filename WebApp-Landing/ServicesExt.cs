@@ -10,7 +10,7 @@ namespace WebApp_Landing
             services.AddRazorPages()
                 .AddApplicationPart(typeof(Pages.Pages_Index).Assembly)
                 .AddApplicationPart(typeof(Pages.Pages_Error).Assembly)
-                .AddApplicationPart(typeof(Pages.Pages_Privacy).Assembly) 
+
                 .AddRazorPagesOptions(options =>
                 {
                     options.Conventions.AddAreaFolderRouteModelConvention("Landing", "/", model =>
