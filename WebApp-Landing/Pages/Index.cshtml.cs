@@ -1,52 +1,69 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using WebApp_Landing.ApiModels;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
+using WebApp_Feed.Areas.Feed.Database;
+using WebApp_Feed.Areas.Feed.Models;
+using WebApp_Feed.Areas.Feed.Models.ApiModels;
 
-namespace WebApp_Landing.Pages
-{
 public class IndexModel : PageModel
 {
-    private readonly HttpClient _httpClient;
+    private readonly GreenswampContext _context;
+    private readonly IHttpClientFactory _httpClientFactory;
 
-    public List<(string Name, string Description, string ImageUrl)> Breeds { get; set; }
+    public List<Breed> Breeds { get; set; }
 
-    public IndexModel(IHttpClientFactory httpClientFactory)
+    public IndexModel(GreenswampContext context, IHttpClientFactory httpClientFactory)
     {
-        _httpClient = httpClientFactory.CreateClient();
+        _context = context;
+        _httpClientFactory = httpClientFactory;
     }
 
     public async Task OnGetAsync()
     {
-        var breedResponse = await _httpClient.GetAsync("https://api.thecatapi.com/v1/breeds");
-        if (!breedResponse.IsSuccessStatusCode) return;
-
-        var breedJson = await breedResponse.Content.ReadAsStringAsync();
-        var breeds = JsonSerializer.Deserialize<List<BreedApiModel>>(breedJson,
-            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-        Breeds = new List<(string, string, string)>();
-
-        foreach (var breed in breeds)
+        if (!_context.Breeds.Any())
         {
-            string imageUrl = "";
-            if (!string.IsNullOrEmpty(breed.Reference_Image_Id))
-            {
-                var imageResponse = await _httpClient.GetAsync($"https://api.thecatapi.com/v1/images/{breed.Reference_Image_Id}");
-                    if (imageResponse.IsSuccessStatusCode)
-                    {
-                        var imageJson = await imageResponse.Content.ReadAsStringAsync();
-                        var image = JsonSerializer.Deserialize<BreedImageModel>(imageJson,
-                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                        imageUrl = image?.Url ?? "";
-                    Console.WriteLine($"Breed: {breed.Name}, Image: {imageUrl}");
+            var http = _httpClientFactory.CreateClient();
+            var json = await http.GetStringAsync("https://api.thecatapi.com/v1/breeds");
 
+            var breeds = JsonSerializer.Deserialize<List<BreedApiModel>>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            foreach (var breed in breeds)
+            {
+                var newBreed = new Breed
+                {
+                    ApiId = breed.Id,
+                    Name = breed.Name,
+                    Description = breed.Description,
+                    Images = new List<Image>()
+                };
+
+                if (!string.IsNullOrEmpty(breed.Reference_Image_Id))
+                {
+                    var imageJson = await http.GetStringAsync($"https://api.thecatapi.com/v1/images/{breed.Reference_Image_Id}");
+                    var imageData = JsonSerializer.Deserialize<BreedImageModel>(imageJson, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    if (!string.IsNullOrEmpty(imageData?.Url))
+                    {
+                        newBreed.Images.Add(new Image
+                        {
+                            ReferenceImageId = breed.Reference_Image_Id,
+                            Url = imageData.Url
+                        });
+                    }
                 }
+
+                _context.Breeds.Add(newBreed);
             }
 
-            Breeds.Add((breed.Name, breed.Description, imageUrl));
+            await _context.SaveChangesAsync();
         }
-    }
-}
 
+        Breeds = await _context.Breeds.Include(b => b.Images).ToListAsync();
+    }
 }

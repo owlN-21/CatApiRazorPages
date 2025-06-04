@@ -1,6 +1,9 @@
 using Microsoft.Extensions.FileProviders;
 // using WebApp_Feed;
 using WebApp_Landing;
+using WebApp_Feed.Areas.Feed.Database;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace WebApp_EFDB
 {
@@ -27,6 +30,13 @@ namespace WebApp_EFDB
             // builder.Services.AddFeedControllers();
             // builder.Services.AddFeedDatabase(builder.Configuration.GetConnectionString("SQLiteConnection"));
 
+            
+
+            builder.Services.AddDbContext<GreenswampContext>(options =>
+                 options.UseSqlite(builder.Configuration.GetConnectionString("SQLiteConnection")));
+
+            
+
             // Add Landing Pages
             builder.Services.AddLandingPages();
 
@@ -39,9 +49,19 @@ namespace WebApp_EFDB
             {
                 app.UseExceptionHandler();
             }
+            
+
+            // creating a database if there is none
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<GreenswampContext>();
+                dbContext.Database.EnsureCreated();
+            }
+
 
             // Add static files from feed
-            // app.UseLocalStaticFiles("WebApp-Feed");
+            app.UseLocalStaticFiles("WebApp-Feed");
 
             // Add static files from landing
             app.UseLocalStaticFiles("WebApp-Landing");

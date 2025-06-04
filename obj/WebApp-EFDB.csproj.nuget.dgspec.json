@@ -220,7 +220,11 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\2_term\\server_programmer\\7_lab\\WebApp-EFDB\\WebApp-Feed\\WebApp-Feed.csproj": {
+                "projectPath": "D:\\2_term\\server_programmer\\7_lab\\WebApp-EFDB\\WebApp-Feed\\WebApp-Feed.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

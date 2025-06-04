@@ -15,18 +15,14 @@ public class GreenswampContext : DbContext
 
     public DbSet<Breed> Breeds { get; set; }
     public DbSet<Image> Images { get; set; }
-    public DbSet<Comment> Comments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Breed>()
             .HasMany(b => b.Images)
             .WithOne(i => i.Breed)
-            .OnDelete(DeleteBehavior.Cascade); // Cascade delete
-
-        modelBuilder.Entity<Breed>()
-            .HasMany(b => b.Comments)
-            .WithOne(c => c.Breed)
+            .HasForeignKey(i => i.BreedId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }
+

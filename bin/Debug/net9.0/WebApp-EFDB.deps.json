@@ -2322,6 +2322,9 @@
         }
       },
       "WebApp-Landing/1.0.0": {
+        "dependencies": {
+          "WebApp-Feed": "1.0.0"
+        },
         "runtime": {
           "WebApp-Landing.dll": {
             "assemblyVersion": "1.0.0",

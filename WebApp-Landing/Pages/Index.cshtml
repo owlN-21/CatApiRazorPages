@@ -4,13 +4,22 @@
     ViewData["Title"] = "Home page";
 }
 
-<h1>Список пород кошек</h1>
 
-@foreach (var item in Model.Breeds)
+<h1>Породы кошек</h1>
+
+@foreach (var breed in Model.Breeds)
 {
-    <div style="margin-bottom:20px;">
-        <h2>@item.Name</h2>
-        <img src="@item.ImageUrl" alt="@item.Name" width="200" />
-        <p>@item.Description</p>
+    <div style="margin-bottom: 20px;">
+        <h2>@breed.Name</h2>
+        <p>@breed.Description</p>
+
+        @if (breed.Images?.Any() == true)
+        {
+            <img src="@breed.Images.First().Url" alt="@breed.Name" width="200" />
+        }
+        else
+        {
+            <p><i>Изображение отсутствует</i></p>
+        }
     </div>
 }

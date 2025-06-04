@@ -311,3 +311,4 @@ D:\2_term\server_programmer\7_lab\WebApp-EFDB\obj\Debug\net9.0\refint\WebApp-EFD
 D:\2_term\server_programmer\7_lab\WebApp-EFDB\obj\Debug\net9.0\WebApp-EFDB.pdb
 D:\2_term\server_programmer\7_lab\WebApp-EFDB\obj\Debug\net9.0\WebApp-EFDB.genruntimeconfig.cache
 D:\2_term\server_programmer\7_lab\WebApp-EFDB\obj\Debug\net9.0\ref\WebApp-EFDB.dll
+D:\2_term\server_programmer\7_lab\WebApp-EFDB\obj\Debug\net9.0\WebApp-EFDB.sourcelink.json

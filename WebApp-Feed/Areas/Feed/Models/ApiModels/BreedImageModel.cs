@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApp_Landing.ApiModels
+namespace WebApp_Feed.Areas.Feed.Models.ApiModels
 {
     public class BreedImageModel
     {

@@ -28,3 +28,4 @@ D:\2_term\server_programmer\7_lab\WebApp-EFDB\WebApp-Feed\obj\Debug\net6.0\refin
 D:\2_term\server_programmer\7_lab\WebApp-EFDB\WebApp-Feed\obj\Debug\net6.0\WebApp-Feed.pdb
 D:\2_term\server_programmer\7_lab\WebApp-EFDB\WebApp-Feed\obj\Debug\net6.0\WebApp-Feed.genruntimeconfig.cache
 D:\2_term\server_programmer\7_lab\WebApp-EFDB\WebApp-Feed\obj\Debug\net6.0\ref\WebApp-Feed.dll
+D:\2_term\server_programmer\7_lab\WebApp-EFDB\WebApp-Feed\obj\Debug\net6.0\WebApp-Feed.sourcelink.json

@@ -32,7 +32,6 @@ namespace WebApp_Feed.Areas.Feed.Controllers
         {
             var breed = await _context.Breeds
                                     .Include(b => b.Images)
-                                    .Include(b => b.Comments)
                                     .FirstOrDefaultAsync(b => b.Id == id);
 
             if (breed == null)
