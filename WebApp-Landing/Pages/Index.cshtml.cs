@@ -4,6 +4,7 @@ using System.Text.Json;
 using WebApp_Feed.Areas.Feed.Database;
 using WebApp_Feed.Areas.Feed.Models;
 using WebApp_Feed.Areas.Feed.Models.ApiModels;
+using Microsoft.AspNetCore.Mvc;
 
 public class IndexModel : PageModel
 {
@@ -66,4 +67,20 @@ public class IndexModel : PageModel
 
         Breeds = await _context.Breeds.Include(b => b.Images).ToListAsync();
     }
+
+    public async Task<IActionResult> OnPostDeleteAsync(int id)
+    {
+        var breed = await _context.Breeds
+            .Include(b => b.Images)
+            .FirstOrDefaultAsync(b => b.Id == id);
+
+        if (breed != null)
+        {
+            _context.Breeds.Remove(breed);
+            await _context.SaveChangesAsync();
+        }
+
+        return RedirectToPage();
+    }
+
 }

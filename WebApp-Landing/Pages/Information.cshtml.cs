@@ -15,16 +15,14 @@ public class InformationModel : PageModel
 
     public Breed Breed { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int breedId)
+     public async Task<IActionResult> OnGetAsync(int id)
     {
         Breed = await _context.Breeds
             .Include(b => b.Images)
-            .FirstOrDefaultAsync(b => b.Id == breedId);
+            .FirstOrDefaultAsync(b => b.Id == id);
 
         if (Breed == null)
-        {
             return NotFound();
-        }
 
         return Page();
     }

@@ -1,4 +1,4 @@
-@page
+@page "{id:int}"
 @model InformationModel
 
 <h1>@Model.Breed.Name</h1>
@@ -13,3 +13,5 @@ else
 {
     <p><i>Изображение отсутствует</i></p>
 }
+
+<a asp-page="/EditBreed" asp-route-id="@Model.Breed.Id" class="btn btn-primary">Редактировать</a>

@@ -1,0 +1,19 @@
+@page "{id:int}"
+@model EditBreedModel
+
+<h2>Редактировать породу</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Breed.Id" />
+
+    <div class="mb-3">
+        <label asp-for="Breed.Name" class="form-label"></label>
+        <input asp-for="Breed.Name" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Breed.Description" class="form-label"></label>
+        <textarea asp-for="Breed.Description" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Сохранить</button>
+</form>

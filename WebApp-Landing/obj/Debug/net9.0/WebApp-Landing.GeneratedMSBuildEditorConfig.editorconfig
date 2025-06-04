@@ -24,6 +24,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkQnJlZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/2_term/server_programmer/7_lab/WebApp-EFDB/WebApp-Landing/Pages/EditBreed.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdEJyZWVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/2_term/server_programmer/7_lab/WebApp-EFDB/WebApp-Landing/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

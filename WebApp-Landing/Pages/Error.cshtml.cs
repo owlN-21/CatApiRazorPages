@@ -23,5 +23,7 @@ namespace WebApp_Landing.Pages
         {
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
         }
+
+        
     }
 }

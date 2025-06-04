@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebApp-EFDB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3214fdc57dcc0689d21e800b9fca164cfec99fcf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3cf9d143b78018becadb5e1ad825c7cf5bb4fe16")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebApp-EFDB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebApp-EFDB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

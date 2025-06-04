@@ -38,9 +38,8 @@
 {
     <div class="breed-container">
         <h2>
-            <a href="/Information?breedId=@breed.Id" class="breed-link">
-                @breed.Name
-            </a>
+            <a asp-area="Landing" asp-page="/Information" asp-route-id="@breed.Id">@breed.Name</a>
+
         </h2>
 
         @if (breed.Images?.Any() == true)
@@ -51,5 +50,9 @@
         {
             <p><i>Изображение отсутствует</i></p>
         }
-            </div>
+        <form method="post" asp-page-handler="Delete" asp-route-id="@breed.Id" onsubmit="return confirm('Вы уверены, что хотите удалить эту породу?');">
+            <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+        </form>
+
+    </div>
 }
