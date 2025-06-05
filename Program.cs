@@ -42,6 +42,14 @@ namespace WebApp_EFDB
 
             builder.Services.AddHttpClient();
 
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                    options.JsonSerializerOptions.WriteIndented = true;
+                });;
+
+
 
             var app = builder.Build();
 
@@ -70,6 +78,7 @@ namespace WebApp_EFDB
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
                 endpoints.MapAreaControllerRoute(
                     name: "feed_area",

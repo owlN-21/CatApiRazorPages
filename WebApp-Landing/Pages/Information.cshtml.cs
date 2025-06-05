@@ -19,6 +19,7 @@ public class InformationModel : PageModel
     {
         Breed = await _context.Breeds
             .Include(b => b.Images)
+            .Include(b => b.Temperaments)
             .FirstOrDefaultAsync(b => b.Id == id);
 
         if (Breed == null)

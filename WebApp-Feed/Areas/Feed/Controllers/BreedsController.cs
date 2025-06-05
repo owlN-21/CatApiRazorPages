@@ -32,10 +32,12 @@ namespace WebApp_Feed.Areas.Feed.Controllers
         {
             var breed = await _context.Breeds
                                     .Include(b => b.Images)
+                                    .Include(b => b.Temperaments)
                                     .FirstOrDefaultAsync(b => b.Id == id);
 
             if (breed == null)
                 return NotFound();
+
 
             return breed;
         }

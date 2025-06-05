@@ -5,6 +5,9 @@
 
 <p><strong>Описание:</strong> @Model.Breed.Description</p>
 
+<p><strong>Темперамент:</strong> @string.Join(", ", Model.Breed.Temperaments.Select(t => t.Name))</p>
+
+
 @if (Model.Breed.Images?.Any() == true)
 {
     <img src="@Model.Breed.Images.First().Url" alt="@Model.Breed.Name" width="300" />
@@ -13,5 +16,6 @@ else
 {
     <p><i>Изображение отсутствует</i></p>
 }
+
 
 <a asp-page="/EditBreed" asp-route-id="@Model.Breed.Id" class="btn btn-primary">Редактировать</a>

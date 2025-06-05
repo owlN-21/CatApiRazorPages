@@ -8,16 +8,20 @@
 
 <form method="post">
     <div class="mb-3">
-        <label for="Name" class="form-label">Имя породы</label>
-        <input type="text" class="form-control" id="Name" name="Name" required />
+        <label>Имя</label>
+        <input name="Name" class="form-control" />
     </div>
     <div class="mb-3">
-        <label for="Description" class="form-label">Описание</label>
-        <textarea class="form-control" id="Description" name="Description" rows="3" required></textarea>
+        <label>Описание</label>
+        <textarea name="Description" class="form-control"></textarea>
     </div>
     <div class="mb-3">
-        <label for="ImageUrl" class="form-label">URL изображения</label>
-        <input type="url" class="form-control" id="ImageUrl" name="ImageUrl" required />
+        <label>URL изображения</label>
+        <input name="ImageUrl" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <div class="mb-3">
+        <label>Темперамент (через запятую)</label>
+        <input name="Temperament" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить</button>
 </form>

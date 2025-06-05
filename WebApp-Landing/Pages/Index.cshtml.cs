@@ -38,12 +38,15 @@ public class IndexModel : PageModel
                     ApiId = breed.Id,
                     Name = breed.Name,
                     Description = breed.Description,
-                    Images = new List<Image>()
+                    Images = new List<Image>(),
+                    Temperaments = new List<Temperament>()
                 };
 
                 if (!string.IsNullOrEmpty(breed.Reference_Image_Id))
                 {
                     var imageJson = await http.GetStringAsync($"https://api.thecatapi.com/v1/images/{breed.Reference_Image_Id}");
+                    await Task.Delay(500); // пауза 200 мс между запросами
+
                     var imageData = JsonSerializer.Deserialize<BreedImageModel>(imageJson, new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
@@ -59,13 +62,51 @@ public class IndexModel : PageModel
                     }
                 }
 
+                if (!string.IsNullOrEmpty(breed.Temperament))
+                {
+                    var temperaments = breed.Temperament.Split(", ", StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (var temp in temperaments)
+                    {
+                        newBreed.Temperaments.Add(new Temperament { Name = temp });
+                    }
+                }
+
+
                 _context.Breeds.Add(newBreed);
             }
 
             await _context.SaveChangesAsync();
+            
         }
 
-        Breeds = await _context.Breeds.Include(b => b.Images).ToListAsync();
+        Breeds = await _context.Breeds
+                .Include(b => b.Images)
+                .Include(b => b.Temperaments)
+                .ToListAsync();
+                
+        
+        // Console.WriteLine("=== Таблица Breeds ===");
+        // foreach (var breed in Breeds)
+        // {
+        //     Console.WriteLine($"ID: {breed.Id}, Name: {breed.Name}, ApiId: {breed.ApiId}, Description: {breed.Description}");
+
+        //     if (breed.Images?.Any() == true)
+        //     {
+        //         foreach (var image in breed.Images)
+        //         {
+        //             Console.WriteLine($"   └── Image ID: {image.Id}, URL: {image.Url}, RefId: {image.ReferenceImageId}");
+        //         }
+        //     }
+
+        //     if (breed.Temperaments?.Any() == true)
+        //     {
+        //         foreach (var temp in breed.Temperaments)
+        //         {
+        //             Console.WriteLine($"   └── Temperament ID: {temp.Id}, Name: {temp.Name}");
+        //         }
+        //     }
+        // }
     }
 
     public async Task<IActionResult> OnPostDeleteAsync(int id)

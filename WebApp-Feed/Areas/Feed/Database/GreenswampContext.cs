@@ -18,11 +18,18 @@ public class GreenswampContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Breed>()
+        modelBuilder.Entity<Breed>() // One-to-Many
             .HasMany(b => b.Images)
             .WithOne(i => i.Breed)
             .HasForeignKey(i => i.BreedId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Cascade); // удалит и Images
+
+        modelBuilder.Entity<Breed>() //Many-to-Many
+            .HasMany(b => b.Temperaments)
+            .WithMany(t => t.Breeds)
+            .UsingEntity(j => j.ToTable("BreedTemperament"));  // удаляет только связанные строки
+
     }
+
 }
 
